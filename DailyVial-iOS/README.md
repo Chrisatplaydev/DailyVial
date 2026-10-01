@@ -10,7 +10,7 @@ This is the cloud-buildable iPhone container for the DailyVial web app.
 
 ## Before a production build
 
-1. Create an Expo account and run `npx eas-cli@latest init` to replace the placeholder EAS project ID in `app.json`.
+1. The Expo project is linked in `app.json`. Sign in to Expo from the build computer before building.
 2. Sign in to the Apple Developer account when EAS asks to create or use signing credentials.
 3. Create matching In-App Purchase products in App Store Connect.
 4. Add RevenueCat/StoreKit purchase handling and a real mobile ad SDK. The web app's current payment buttons and ad settings are not live App Store billing or live ads.

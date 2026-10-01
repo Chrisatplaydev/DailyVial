@@ -13,7 +13,7 @@
     "plugins": ["react-native-webview"],
     "extra": {
       "eas": {
-        "projectId": "REPLACE_AFTER_EAS_INIT"
+        "projectId": "11df7771-bbd8-400b-be92-eb310f2c88a3"
       }
     }
   }
