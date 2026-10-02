@@ -31982,18 +31982,62 @@ async function ftRun(){
   }
 }
 
-function renderFoodResults(q){
+let foodSearchSequence = 0;
+
+/* The bundled list makes common searches instant and works without a signal.
+   A matching search also reaches Open Food Facts, a public product database,
+   so packaged and regional foods can be logged with their actual labelled
+   nutrition instead of pretending a generic substitute is exact. */
+function openFoodFactsProduct(product){
+  const n = product.nutriments || {};
+  const kcal = Number(n['energy-kcal_100g'] != null ? n['energy-kcal_100g'] : n['energy-kcal']);
+  if(!Number.isFinite(kcal) || kcal < 0) return null;
+  const name = [product.product_name, product.brands].filter(Boolean).join(' — ').trim();
+  if(!name) return null;
+  const num = key => {
+    const value = Number(n[key]);
+    return Number.isFinite(value) && value >= 0 ? value : 0;
+  };
+  return {
+    name, group:'Open Food Facts', kcal,
+    p:num('proteins_100g'), c:num('carbohydrates_100g'),
+    f:num('fat_100g'), fib:num('fiber_100g'),
+    serve:[['100 g',100]], source:'openfoodfacts'
+  };
+}
+
+async function renderFoodResults(q){
   const wrap = $('food-results');
   const list = N().search(q, 40);
   wrap.innerHTML = '';
-  if(!list.length){ wrap.appendChild(el('div','empty',T('food.noMatch'))); return; }
-  list.forEach(f => {
+  const addRow = f => {
     const b = el('button','fres');
     b.innerHTML = `<div class="fr-m"><span class="fr-n">${esc(N().label(f.name))}</span><span class="fr-g">${esc(N().groupLabel(f.group))}</span></div>
       <span class="fr-k">${f.kcal}<small>/100g</small></span>`;
     b.onclick = () => { $('food-sheet').classList.remove('open'); openPortion(f); };
     wrap.appendChild(b);
-  });
+  };
+  list.forEach(addRow);
+  const term = String(q || '').trim();
+  if(term.length < 3){
+    if(!list.length) wrap.appendChild(el('div','empty',T('food.noMatch')));
+    return;
+  }
+  const sequence = ++foodSearchSequence;
+  const loading = el('div','ft-note','Searching Open Food Facts…');
+  wrap.appendChild(loading);
+  try{
+    const url = 'https://world.openfoodfacts.org/cgi/search.pl?search_simple=1&action=process&json=1&page_size=20&fields=product_name,brands,nutriments&search_terms=' + encodeURIComponent(term);
+    const res = await fetch(url, {headers:{Accept:'application/json'}});
+    const data = await res.json();
+    if(sequence !== foodSearchSequence) return;
+    loading.remove();
+    const localNames = new Set(list.map(f => String(f.name).toLowerCase()));
+    (data.products || []).map(openFoodFactsProduct).filter(Boolean)
+      .filter(f => !localNames.has(f.name.toLowerCase())).slice(0, 12).forEach(addRow);
+  }catch(e){
+    if(sequence === foodSearchSequence) loading.remove();
+  }
 }
 
 function openPortion(food, preset){
