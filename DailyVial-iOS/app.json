@@ -10,14 +10,6 @@
       "supportsTablet": true,
       "buildNumber": "1"
     },
-    "plugins": [
-      [
-        "expo-notifications",
-        {
-          "defaultChannel": "dailyvial-reminders"
-        }
-      ]
-    ],
     "extra": {
       "eas": {
         "projectId": "11df7771-bbd8-400b-be92-eb310f2c88a3"
