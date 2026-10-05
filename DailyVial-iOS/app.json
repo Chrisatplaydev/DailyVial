@@ -3,17 +3,16 @@
     "name": "DailyVial",
     "slug": "dailyvial",
     "version": "1.0.0",
+    "icon": "./assets/dailyvial-icon.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "ios": {
       "bundleIdentifier": "com.chrisatplay.dailyvial",
       "supportsTablet": true,
-      "buildNumber": "1"
+      "buildNumber": "2",
+      "infoPlist": {"ITSAppUsesNonExemptEncryption": false}
     },
-    "extra": {
-      "eas": {
-        "projectId": "11df7771-bbd8-400b-be92-eb310f2c88a3"
-      }
-    }
+    "extra": {"eas": {"projectId": "11df7771-bbd8-400b-be92-eb310f2c88a3"}},
+    "plugins": ["expo-notifications", "./plugins/withLocalNotificationsOnly"]
   }
 }
