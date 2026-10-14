@@ -1,16 +1,21 @@
-# DailyVial
+# DailyVial — new build
 
-DailyVial is a private, on-device daily tracker for calories, supplements, and peptide-related personal logs. It is a tracking tool only; it does not provide medical advice, dosing guidance, or treatment recommendations.
+This repository contains the new light-blue DailyVial build developed with Chris: the droplet mascot, rounded white cards, Home / Dose / Progress / Nutrition / Community navigation, meal photos, and the redesigned quick-action menu.
 
-## First version
+## Open it
 
-- Set a daily calorie goal and log meals or snacks.
-- Log supplements with a name, amount, and time.
-- Keep personal peptide-related entries with a name, scheduled time, and notes.
-- See today's calorie progress in one dashboard.
+Open `DailyVial.html` in a browser, or visit this repository's GitHub Pages site. `index.html` opens the same app. All artwork, styling, and JavaScript are embedded in `DailyVial.html`.
 
-## Run it
+## Current features
 
-Open a new **iOS App** in Xcode named \`DailyVial\` using SwiftUI, then replace its generated app file with \`DailyVialApp.swift\` from this repository.
+- Medication, dose, weight, water, meal, mood, workout, and local small-win entries.
+- Browser-local persistence.
+- Protein, fiber, and water start at zero.
+- Generated droplet, chicken-and-avocado bowl, and yogurt-and-berry parfait artwork.
+- Readable nutrition shortcuts and an organized quick-action menu with icons.
 
-Before publishing, add a privacy policy, complete App Store privacy disclosures accurately, and have a qualified clinician review health-related wording.
+This is the current build in development. Charts may include labeled sample values. Automatic scanning, shared community features, and account services are not connected. Photos chosen for preview remain on the device.
+
+The previous application and the attempted legacy integration are retired. Earlier source is recoverable through Git history; it is not loaded by this build.
+
+See [privacy information](privacy.html).
