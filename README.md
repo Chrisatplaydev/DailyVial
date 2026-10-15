@@ -4,6 +4,14 @@ The new light-blue DailyVial build: a peptide and supplement journal with a drop
 
 **[Open DailyVial](https://chrisatplaydev.github.io/DailyVial/)**
 
+## New in this update
+
+- **Care Drops:** a custom droplet rewards button, daily check-ins, a seven-day bonus, theme rewards, and a 120-drop local Plus-day preview. Purchase bonuses are designed for verified payments and are not issued by the preview checkout.
+- **Simpler Peptides:** one injection-journal entry, a new glass-vial illustration, and a guided peptide → prescribed route → selected area → save flow. Saving a routine does not log a dose.
+- **Nearby food:** opt-in one-shot location or public city centers, live OpenStreetMap places, menu links, plant-option tags, and a small source-linked collection of published US menu calories. Availability/coverage varies; unknown calories are not invented.
+
+[Current release notes and limits](NEXT.md)
+
 ## Current build
 
 Home, Peptides, Progress, Nourish, and Circle. A searchable dropdown contains 54 peptide names and 50 supplements, accepts custom names, and records the user's prescribed route without inferring doses. The front/back body journal stores product-specific site history and uses explicitly approved regions for rotation candidates.
