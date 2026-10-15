@@ -12,7 +12,7 @@ Reminders support one-time/daily/weekly schedules, snooze, pause/resume and cale
 
 ## Tour, Nova and the DailyVial logo
 
-A skippable first-use tour explains six essentials, and can be replayed from Profile. The original orbit-droplet logo replaces the pill-shaped header icon. Nova answers app-navigation questions locally with written guidance and direct feature shortcuts. Live AI is not connected; a server adapter is included for a future authenticated, quota-controlled deployment.
+A skippable live walkthrough highlights actual controls across Home, Peptides, Progress, Nourish and Circle. Users click real features and try forms in an isolated practice copy. Replay or jump chapters from Profile → Live app walkthrough. [Walkthrough details](LIVE-WALKTHROUGH.md). The original orbit-droplet logo replaces the pill-shaped header icon. Nova answers app-navigation questions locally with written guidance and direct feature shortcuts. Live AI is not connected; a server adapter is included for a future authenticated, quota-controlled deployment.
 
 [Current release and AI connection requirements](DISCOVERY.md)
 
