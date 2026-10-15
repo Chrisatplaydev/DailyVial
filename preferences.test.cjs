@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),P=require('./preferences.cjs'),C=require('./care-drops.cjs');
+for(const unit of P.UNITS)assert.equal(P.formatAmount('2.5',unit,true),'2.5 '+unit);
+assert.deepEqual(P.parseAmount('250 µg'),{value:'250',unit:'mcg'});
+assert.deepEqual(P.parseAmount('0.25 mL'),{value:'0.25',unit:'mL'});
+assert.equal(P.parseAmount('As directed').unit,'custom');
+assert.equal(P.formatAmount('','',false),'');
+for(const [v,u] of [['2',''],['-1','mg'],['0','IU'],['NaN','mL']])assert.throws(()=>P.formatAmount(v,u,true));
+assert.equal(P.formatAmount('As directed','custom',true),'As directed');
+assert.equal(P.normalize({mode:'bad',defaultUnit:'bad'}).mode,'dark');
+const w={...C.wallet(),balance:200};const n=C.redeem(w,'aurora',100);assert.equal(n.balance,120);assert(n.themes.includes('aurora'));assert.equal(w.balance,200);assert.throws(()=>C.redeem(n,'aurora',101));
+console.log('Dose unit preservation, validation, preferences and cosmetic reward spending passed.');

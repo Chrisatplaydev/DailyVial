@@ -4,6 +4,12 @@ The DailyVial galaxy build: a peptide and supplement journal with a droplet masc
 
 **[Open DailyVial](https://chrisatplaydev.github.io/DailyVial/)**
 
+## Stardust and personal settings
+
+Stardust replaces the rewards name and icon while preserving existing local balances. Profile opens saved personal preferences, free Deep Space / Moonlight modes, default dose units, reduced animations, cosmetic rewards, a local journal backup, and subscription status/cancellation guidance. A generated realistic orbital vial replaces the illustrated bottle. Dose forms separate amount from unit and preserve the chosen unit without conversions.
+
+[Current update and limits](STARDUST.md)
+
 ## Galaxy identity and site-history controls
 
 Midnight indigo, violet/teal nebula glows, subtle stars, lavender accents, and readable light cards give DailyVial its own background identity.
@@ -14,7 +20,7 @@ Open **Peptides → Open map → Edit site history** to remove an entry, or **Re
 
 ## Earlier updates
 
-- **Care Drops:** a custom droplet rewards button, daily check-ins, a seven-day bonus, theme rewards, and a 120-drop local Plus-day preview. Purchase bonuses are designed for verified payments and are not issued by the preview checkout.
+- **Stardust:** a custom droplet rewards button, daily check-ins, a seven-day bonus, theme rewards, and a 120-drop local Plus-day preview. Purchase bonuses are designed for verified payments and are not issued by the preview checkout.
 - **Simpler Peptides:** one injection-journal entry, a new glass-vial illustration, and a guided peptide → prescribed route → selected area → save flow. Saving a routine does not log a dose.
 - **Nearby food:** opt-in one-shot location or public city centers, live OpenStreetMap places, menu links, plant-option tags, and a small source-linked collection of published US menu calories. Availability/coverage varies; unknown calories are not invented.
 

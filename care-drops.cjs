@@ -1,6 +1,6 @@
 // Shared domain rules. Production callers must supply server time and verified events.
 const CareDrops=(()=>{
- const DAY=86400000,PRICES={plusDay:120,sunrise:60,starlight:100},BONUSES={week:15,month:50,year:150,lifetime:250};
+ const DAY=86400000,PRICES={plusDay:120,sunrise:60,starlight:100,aurora:80,constellation:90},BONUSES={week:15,month:50,year:150,lifetime:250};
  const day=n=>new Date(n).toISOString().slice(0,10);
  function wallet(){return {balance:0,streak:0,lastCheckin:null,events:[],themes:[],plusUntil:0}}
  function normalize(w){return {...wallet(),...structuredClone(w||{})}}
