@@ -4,6 +4,12 @@ The DailyVial galaxy build: a peptide and supplement journal with a droplet masc
 
 **[Open DailyVial](https://chrisatplaydev.github.io/DailyVial/)**
 
+## Tour, Nova and the DailyVial logo
+
+A skippable first-use tour explains six essentials, and can be replayed from Profile. The original orbit-droplet logo replaces the pill-shaped header icon. Nova answers app-navigation questions locally with written guidance and direct feature shortcuts. Live AI is not connected; a server adapter is included for a future authenticated, quota-controlled deployment.
+
+[Current release and AI connection requirements](DISCOVERY.md)
+
 ## Stardust and personal settings
 
 Stardust replaces the rewards name and icon while preserving existing local balances. Profile opens saved personal preferences, free Deep Space / Moonlight modes, default dose units, reduced animations, cosmetic rewards, a local journal backup, and subscription status/cancellation guidance. A generated realistic orbital vial replaces the illustrated bottle. Dose forms separate amount from unit and preserve the chosen unit without conversions.
