@@ -1,10 +1,18 @@
 # DailyVial
 
-The new light-blue DailyVial build: a peptide and supplement journal with a droplet mascot, generated meal photography, personal progress, and an organized quick-action menu.
+The DailyVial galaxy build: a peptide and supplement journal with a droplet mascot, generated meal photography, personal progress, and an organized quick-action menu.
 
 **[Open DailyVial](https://chrisatplaydev.github.io/DailyVial/)**
 
-## New in this update
+## Galaxy identity and site-history controls
+
+Midnight indigo, violet/teal nebula glows, subtle stars, lavender accents, and readable light cards give DailyVial its own background identity.
+
+Open **Peptides → Open map → Edit site history** to remove an entry, or **Reset history** for the selected product. Removal is recoverable with Undo. A linked dose is retained unless its removal is explicitly selected.
+
+[Current release details](GALAXY.md)
+
+## Earlier updates
 
 - **Care Drops:** a custom droplet rewards button, daily check-ins, a seven-day bonus, theme rewards, and a 120-drop local Plus-day preview. Purchase bonuses are designed for verified payments and are not issued by the preview checkout.
 - **Simpler Peptides:** one injection-journal entry, a new glass-vial illustration, and a guided peptide → prescribed route → selected area → save flow. Saving a routine does not log a dose.

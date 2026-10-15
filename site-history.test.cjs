@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict'),H=require('./site-history.cjs');const now=Date.parse('2026-10-15T12:00Z');
+const original={siteEvents:[{id:'a',productId:'p1',doseId:'dose-a',date:'2026-10-14T12:00Z'},{id:'b',productId:'p1',date:'2026-10-15T12:00Z'},{id:'c',productId:'p2',date:'2026-10-15T11:00Z'}],doses:[{id:'dose-a',date:'2026-10-14T12:00Z'},{id:'dose-other',date:'2026-10-15T11:00Z'}],siteTrash:[]};
+let next=H.remove(original,'a',false,'op1',now);assert.equal(next.siteEvents.length,2);assert.equal(next.doses.length,2);assert.equal(original.siteEvents.length,3);
+next=H.undo(next,'op1');assert.equal(next.siteEvents.length,3);assert.equal(H.undo(next,'op1').siteEvents.length,3);
+next=H.remove(original,'a',true,'op2',now);assert.equal(next.doses.length,1);next=H.undo(next,'op2');assert.equal(next.doses.length,2);
+next=H.reset(original,'p1','reset1',now);assert.deepEqual(next.siteEvents.map(e=>e.id),['c']);assert.equal(next.doses.length,2);assert.equal(next.siteTrash[0].events.length,2);
+next=H.undo(next,'reset1');assert.equal(next.siteEvents.length,3);assert.equal(next.doses.length,2);
+assert.equal(H.remove(original,'missing',true,'unused',now).siteTrash.length,0);
+assert.equal(H.reset(original,'missing','unused',now).siteTrash.length,0);
+console.log('Site history: scoped reset, optional linked-dose removal, preservation, undo and duplicate protection passed.');

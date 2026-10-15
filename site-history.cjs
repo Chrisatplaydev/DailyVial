@@ -1,0 +1,9 @@
+// Recoverable site-history operations. A dose log is removed only when explicitly selected.
+const SiteHistory=(()=>{
+ function copy(data){return {siteEvents:structuredClone(data.siteEvents||[]),doses:structuredClone(data.doses||[]),siteTrash:structuredClone(data.siteTrash||[])}}
+ function remove(data,eventId,removeDose,operationId,now){const next=copy(data),event=next.siteEvents.find(e=>e.id===eventId);if(!event)return next;const dose=removeDose&&event.doseId?next.doses.find(d=>d.id===event.doseId):null;next.siteEvents=next.siteEvents.filter(e=>e.id!==eventId);if(dose)next.doses=next.doses.filter(d=>d.id!==dose.id);next.siteTrash.push({id:operationId,productId:event.productId,events:[event],doses:dose?[dose]:[],removedAt:new Date(now).toISOString(),label:'Removed site entry'});return next}
+ function reset(data,productId,operationId,now){const next=copy(data),events=next.siteEvents.filter(e=>e.productId===productId);if(!events.length)return next;next.siteEvents=next.siteEvents.filter(e=>e.productId!==productId);next.siteTrash.push({id:operationId,productId,events,doses:[],removedAt:new Date(now).toISOString(),label:'Reset product site history'});return next}
+ function undo(data,operationId){const next=copy(data),operation=next.siteTrash.find(t=>t.id===operationId);if(!operation)return next;for(const e of operation.events)if(!next.siteEvents.some(x=>x.id===e.id))next.siteEvents.push(e);for(const d of operation.doses)if(!next.doses.some(x=>x.id===d.id))next.doses.push(d);next.siteEvents.sort((a,b)=>Date.parse(a.date)-Date.parse(b.date));next.doses.sort((a,b)=>Date.parse(a.date)-Date.parse(b.date));next.siteTrash=next.siteTrash.filter(t=>t.id!==operationId);return next}
+ return {remove,reset,undo};
+})();
+if(typeof module!=='undefined'&&module.exports)module.exports=SiteHistory;
