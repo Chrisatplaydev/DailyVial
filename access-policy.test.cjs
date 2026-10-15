@@ -1,0 +1,22 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const policy=require('./access-policy.cjs');const now=Date.parse('2026-10-14T20:00:00Z');
+assert.equal(policy.isPremium({plan:'week',verified:true,expiresAt:now},now),false);
+assert.equal(policy.isPremium({plan:'week',verified:true,expiresAt:now+1},now),true);
+assert.equal(policy.isPremium({plan:'lifetime',verified:true,revoked:true},now),false);
+assert.equal(policy.isPremium({plan:'lifetime',verified:false},now),false);
+let ledger=policy.newLedger('account-a',now);
+assert.throws(()=>policy.grantVerifiedReward(ledger,{verified:false,id:'a',accountId:'account-a'},now));
+assert.throws(()=>policy.grantVerifiedReward(ledger,{verified:true,id:'a',accountId:'account-b'},now));
+const event={verified:true,id:'r1',accountId:'account-a'};
+ledger=policy.grantVerifiedReward(ledger,event,now);
+ledger=policy.grantVerifiedReward(ledger,event,now);assert.equal(ledger.credits,1);
+ledger=policy.reserveScan(ledger,'scan1',null,now);assert.equal(ledger.credits,0);
+assert.throws(()=>policy.reserveScan(ledger,'scan2',null,now));
+ledger=policy.finishScan(ledger,'scan1',false);assert.equal(ledger.credits,1);
+ledger=policy.finishScan(ledger,'scan1',false);assert.equal(ledger.credits,1);
+for(let i=2;i<=4;i++)ledger=policy.grantVerifiedReward(ledger,{...event,id:'r'+i},now);
+assert.throws(()=>policy.grantVerifiedReward(ledger,{...event,id:'r5'},now));
+ledger=policy.grantVerifiedReward(ledger,{...event,id:'r6'},now+86400000);assert.equal(ledger.credits,1);
+assert.equal(ledger.rewardIds.length,1);
+
+console.log('Access policy checks passed.');
