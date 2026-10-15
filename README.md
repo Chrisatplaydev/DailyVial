@@ -4,6 +4,12 @@ The DailyVial galaxy build: a peptide and supplement journal with a droplet masc
 
 **[Open DailyVial](https://chrisatplaydev.github.io/DailyVial/)**
 
+## Daily tools and Gemini preparation
+
+Reminders support one-time/daily/weekly schedules, snooze, pause/resume and calendar export. Visit prep stores questions and provides a Plus preview of journal summaries. Nova uses the cosmic mascot. The photo flow has sharing consent, portion notes and reviewed food-level estimates. Gemini remains disabled until the prepared Firebase backend is deployed with a server-side secret, authentication and quotas. Closed-app push, cloud journal sync, live billing and ads are not connected.
+
+[Current tools, validation and limits](PREMIUM-TOOLS.md)
+
 ## Tour, Nova and the DailyVial logo
 
 A skippable first-use tour explains six essentials, and can be replayed from Profile. The original orbit-droplet logo replaces the pill-shaped header icon. Nova answers app-navigation questions locally with written guidance and direct feature shortcuts. Live AI is not connected; a server adapter is included for a future authenticated, quota-controlled deployment.
