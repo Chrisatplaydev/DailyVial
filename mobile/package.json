@@ -1,0 +1,23 @@
+{
+  "name": "dailyvial-mobile",
+  "private": true,
+  "version": "1.2.1",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "bundle:app": "node bundle-dailyvial.cjs",
+    "start": "expo start",
+    "export:ios": "npm run bundle:app && expo export --platform ios",
+    "test": "node --test *.test.cjs"
+  },
+  "dependencies": {
+    "expo": "~55.0.0",
+    "expo-file-system": "~55.0.26",
+    "expo-sharing": "~55.0.25",
+    "react": "19.2.0",
+    "react-native": "0.83.10",
+    "react-native-webview": "13.16.0"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}
