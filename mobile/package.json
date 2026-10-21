@@ -4,6 +4,7 @@
   "version": "1.2.1",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "eas-build-post-install": "npm run bundle:app",
     "bundle:app": "node bundle-dailyvial.cjs",
     "start": "expo start",
     "export:ios": "npm run bundle:app && expo export --platform ios",
