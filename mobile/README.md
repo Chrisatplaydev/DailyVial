@@ -18,7 +18,7 @@ npm run export:ios
 npx expo prebuild --platform ios --no-install
 ```
 
-The bundler generates `dailyvial-bundle.js`, `dailyvial-icon.png` and `bundle-manifest.json`. The manifest records the source SHA-256. These generated files are included in the EAS upload, while dependencies and local build output are excluded. Do not put account credentials or signing files in Git.
+The bundler generates `dailyvial-bundle.js`, `dailyvial-pass-artwork.js`, `dailyvial-icon.png` and `bundle-manifest.json`. The manifest records the source SHA-256. The repository-root `.easignore` controls the EAS archive, and `eas-build-post-install` regenerates these files on the builder before prebuild. Dependencies and local build output are excluded. Do not put account credentials or signing files in Git.
 
 ## Build and submit
 
