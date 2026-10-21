@@ -1,0 +1,9 @@
+**/node_modules/
+**/.expo/
+/mobile/dist/
+/mobile/ios/
+/mobile/android/
+/assets/
+*.ipa
+*.zip
+**/*.test.cjs
