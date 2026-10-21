@@ -4,6 +4,7 @@ dist/
 /ios/
 /android/
 dailyvial-bundle.js
+dailyvial-pass-artwork.js
 bundle-manifest.json
 *.ipa
 dailyvial-icon.png
