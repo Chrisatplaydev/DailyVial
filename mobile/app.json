@@ -9,7 +9,7 @@
     "userInterfaceStyle": "dark",
     "ios": {
       "bundleIdentifier": "com.chrisatplay.dailyvial",
-      "buildNumber": "5",
+      "buildNumber": "6",
       "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
@@ -18,8 +18,16 @@
         "NSLocationWhenInUseUsageDescription": "Find nearby food spots only when you choose Use my location. You can choose a city instead."
       }
     },
-    "extra": {"eas": {"projectId": "11df7771-bbd8-400b-be92-eb310f2c88a3"}},
-    "plugins": ["expo-sharing"],
-    "platforms": ["ios"]
+    "extra": {
+      "eas": {
+        "projectId": "11df7771-bbd8-400b-be92-eb310f2c88a3"
+      }
+    },
+    "plugins": [
+      "expo-sharing"
+    ],
+    "platforms": [
+      "ios"
+    ]
   }
 }
