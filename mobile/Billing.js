@@ -1,5 +1,6 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {AppState,Alert,Linking,Modal,Pressable,SafeAreaView,ScrollView,StyleSheet,Text,View} from 'react-native';
+import {AppState,Alert,Image,Linking,Modal,Pressable,SafeAreaView,ScrollView,StyleSheet,Text,View} from 'react-native';
+import passArtwork from './dailyvial-pass-artwork';
 import {requireOptionalNativeModule} from 'expo';
 const {activeAccess,entitlementScript,PRODUCTS}=require('./paid-access.cjs');
 const Store=requireOptionalNativeModule('DailyVialStore');
@@ -55,7 +56,7 @@ export function useBilling(web){
    {['Set your own calorie, protein, fiber and water goals.','Review your recorded weight change, dose counts and site history.','Export your journal and appointment-ready summaries.'].map(t=><Text key={t} style={styles.benefit}>• {t}</Text>)}
    <Text style={styles.notice}>AI meal-photo estimates and live AI chat are coming soon. They are unavailable in this version and are not required to use Plus.</Text>
    {activeAccess(access)&&<Text style={styles.success}>Your Apple subscription is active.</Text>}
-   {products.map(p=><Pressable key={p.id} accessibilityRole="button" disabled={busy||activeAccess(access)} style={[styles.plan,(busy||activeAccess(access))&&styles.disabled]} onPress={()=>purchase(p)}><Text style={styles.planTitle}>{p.plan==='year'?'Annual':'Monthly'}</Text><Text style={styles.price}>{p.price} / {p.period}</Text><Text style={styles.planDetail}>Auto-renewing subscription · all available Plus features</Text><Text style={styles.planCTA}>Continue with Apple</Text></Pressable>)}
+   {products.map(p=><Pressable key={p.id} accessibilityRole="button" disabled={busy||activeAccess(access)} style={[styles.plan,(busy||activeAccess(access))&&styles.disabled]} onPress={()=>purchase(p)}><Image source={{uri:passArtwork[p.plan]}} accessible={false} resizeMode="contain" style={{width:'100%',aspectRatio:1,borderRadius:12}}/><Text style={styles.planTitle}>{p.plan==='year'?'Annual':'Monthly'}</Text><Text style={styles.price}>{p.price} / {p.period}</Text><Text style={styles.planDetail}>Auto-renewing subscription · all available Plus features</Text><Text style={styles.planCTA}>Continue with Apple</Text></Pressable>)}
    {!products.length&&<Text style={styles.body}>Plans are temporarily unavailable. No payment has been started.</Text>}
    {!!error&&<Text accessibilityRole="alert" style={styles.error}>{error}</Text>}
    <Pressable disabled={busy} onPress={load} accessibilityRole="button"><Text style={styles.link}>Refresh plans and status</Text></Pressable>
