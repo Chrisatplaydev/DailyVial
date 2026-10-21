@@ -1,8 +1,8 @@
 node_modules/
 .expo/
 dist/
-ios/
-android/
+/ios/
+/android/
 dailyvial-bundle.js
 bundle-manifest.json
 *.ipa
