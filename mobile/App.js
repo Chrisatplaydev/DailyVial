@@ -6,6 +6,7 @@ import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 import {APP_HTML,PRIVACY_HTML} from './dailyvial-bundle';
 const {APP_BASE,navigationTarget,safeExport}=require('./navigation-policy.cjs');
+const {VIEWPORT_LOCK}=require('./viewport.cjs');
 const {NATIVE_BRIDGE}=require('./native-bridge.cjs');
 
 export default function App(){
@@ -37,7 +38,7 @@ export default function App(){
   <StatusBar barStyle="light-content" backgroundColor="#14142c"/>
   <View style={styles.content}>
    {failed?<View style={styles.error}><Text style={styles.heading}>Let’s try that again.</Text><Text style={styles.text}>DailyVial could not open. Reloading does not clear your saved journal.</Text><Pressable accessibilityRole="button" style={styles.button} onPress={()=>{setFailed(false);web.current?.reload();}}><Text style={styles.buttonText}>Reload DailyVial</Text></Pressable></View>:
-    <WebView ref={web} style={styles.web} source={{html:APP_HTML,baseUrl:APP_BASE}} originWhitelist={['https://*','about:blank']} javaScriptEnabled domStorageEnabled sharedCookiesEnabled={false} thirdPartyCookiesEnabled={false} incognito={false} allowFileAccess={false} allowUniversalAccessFromFileURLs={false} mixedContentMode="never" setSupportMultipleWindows={false} allowsInlineMediaPlayback={false} onShouldStartLoadWithRequest={onNavigation} onMessage={onMessage} onLoadEnd={billing.sync} injectedJavaScriptBeforeContentLoaded={NATIVE_BRIDGE} onError={()=>setFailed(true)} onContentProcessDidTerminate={()=>web.current?.reload()}/>
+    <WebView ref={web} style={styles.web} bounces={false} scrollEnabled={false} automaticallyAdjustContentInsets={false} contentInsetAdjustmentBehavior="never" allowsBackForwardNavigationGestures={false} hideKeyboardAccessoryView setBuiltInZoomControls={false} setDisplayZoomControls={false} source={{html:APP_HTML,baseUrl:APP_BASE}} originWhitelist={['https://*','about:blank']} javaScriptEnabled domStorageEnabled sharedCookiesEnabled={false} thirdPartyCookiesEnabled={false} incognito={false} allowFileAccess={false} allowUniversalAccessFromFileURLs={false} mixedContentMode="never" setSupportMultipleWindows={false} allowsInlineMediaPlayback={false} onShouldStartLoadWithRequest={onNavigation} onMessage={onMessage} onLoadEnd={billing.sync} injectedJavaScriptBeforeContentLoaded={NATIVE_BRIDGE+VIEWPORT_LOCK} onError={()=>setFailed(true)} onContentProcessDidTerminate={()=>web.current?.reload()}/>
    }
   </View>
   {billing.modal}
