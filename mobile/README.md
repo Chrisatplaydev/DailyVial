@@ -1,8 +1,10 @@
 # DailyVial iPhone release
 
-Version **1.2.1**, build **6**, using the existing `com.chrisatplay.dailyvial` bundle identifier, Expo project and App Store Connect listing.
+Version **1.2.1**, build **7**, using the existing `com.chrisatplay.dailyvial` bundle identifier, Expo project and App Store Connect listing.
 
 This directory rebuilds the iPhone wrapper around the current root `DailyVial.html`. The prior iPhone artifact confirmed the bundle identifier and version and provided the full-screen layout adjustments. It is a new wrapper implementation, not recovered original `App.js` source.
+
+Build 7 locks the app viewport against pinch and input-focus zoom, disables outer page bounce, and shows purchase loading progress before reporting unavailable Apple products. Ordinary single-finger scrolling remains enabled inside the interface.
 
 The bundled interface works without Firebase or an account. AI meal photos and live Nova AI are marked Coming soon. The app guide and manual journals remain local. Exports open the native share sheet. Progress-photo selection is separate from meal scanning. Nearby food can use the existing optional map service and location permission.
 
