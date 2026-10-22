@@ -11,7 +11,7 @@ test('local app navigation and private export stay inside the intended boundarie
 });
 test('iPhone package contains the saved manual release with no Firebase connection',()=>{
  const config=require('./app.json').expo,manifest=require('./bundle-manifest.json');
- assert.equal(config.ios.bundleIdentifier,'com.chrisatplay.dailyvial');assert.equal(config.version,'1.2.1');assert.equal(config.ios.buildNumber,'6');assert.equal(config.extra.eas.projectId,'11df7771-bbd8-400b-be92-eb310f2c88a3');
+ assert.equal(config.ios.bundleIdentifier,'com.chrisatplay.dailyvial');assert.equal(config.version,'1.2.1');assert.equal(config.ios.buildNumber,'7');assert.equal(config.extra.eas.projectId,'11df7771-bbd8-400b-be92-eb310f2c88a3');
  const bundle=fs.readFileSync(__dirname+'/dailyvial-bundle.js','utf8');
  assert(bundle.includes('Photo calories · Coming soon'));assert(bundle.includes('dailyvial-native-layout'));assert(bundle.includes('dailyvial-demo-v1'));
  assert(!bundle.includes('gstatic.com/firebasejs/'));assert(!bundle.includes('cloudfunctions.net/dailyvialAI'));
