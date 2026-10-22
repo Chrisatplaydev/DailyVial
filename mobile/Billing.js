@@ -1,5 +1,5 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {AppState,Alert,Image,Linking,Modal,Pressable,SafeAreaView,ScrollView,StyleSheet,Text,View} from 'react-native';
+import {ActivityIndicator,AppState,Alert,Image,Linking,Modal,Pressable,SafeAreaView,ScrollView,StyleSheet,Text,View} from 'react-native';
 import passArtwork from './dailyvial-pass-artwork';
 import {requireOptionalNativeModule} from 'expo';
 const {activeAccess,entitlementScript,PRODUCTS}=require('./paid-access.cjs');
@@ -7,9 +7,10 @@ const Store=requireOptionalNativeModule('DailyVialStore');
 const EMPTY={active:false,items:[]};
 const TERMS='https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';
 const PRIVACY='https://chrisatplaydev.github.io/DailyVial/privacy.html';
+const release=require('./app.json').expo;
 
 export function useBilling(web){
- const [visible,setVisible]=useState(false),[products,setProducts]=useState([]),[access,setAccess]=useState(EMPTY),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ const [visible,setVisible]=useState(false),[products,setProducts]=useState([]),[access,setAccess]=useState(EMPTY),[busy,setBusy]=useState(false),[loading,setLoading]=useState(false),[error,setError]=useState('');
  const snapshot=useRef(EMPTY),operation=useRef(false);
  const apply=value=>{snapshot.current=value;setAccess(value);web.current?.injectJavaScript(entitlementScript(value));};
  const refresh=async()=>{
@@ -17,8 +18,13 @@ export function useBilling(web){
   try{apply(await Store.entitlements());setError('');}catch{apply(EMPTY);setError('Apple purchase status could not be checked. Try Restore Purchases.');}
  };
  const load=async()=>{
-  await refresh();if(!Store)return;
-  try{setProducts(await Store.products());}catch{setProducts([]);setError('Apple could not load the plans. Check your connection and try again.');}
+  setLoading(true);
+  try{
+   await refresh();if(!Store)return;
+   const available=await Store.products();setProducts(available);
+   if(!available.length)setError('Apple could not load subscriptions. Please try again shortly. You have not been charged.');
+  }catch{setProducts([]);setError('Apple could not load subscriptions. Please try again shortly. You have not been charged.');}
+  finally{setLoading(false);}
  };
  useEffect(()=>{
   refresh();
@@ -57,13 +63,14 @@ export function useBilling(web){
    <Text style={styles.notice}>AI meal-photo estimates and live AI chat are coming soon. They are unavailable in this version and are not required to use Plus.</Text>
    {activeAccess(access)&&<Text style={styles.success}>Your Apple subscription is active.</Text>}
    {products.map(p=><Pressable key={p.id} accessibilityRole="button" disabled={busy||activeAccess(access)} style={[styles.plan,(busy||activeAccess(access))&&styles.disabled]} onPress={()=>purchase(p)}><Image source={{uri:passArtwork[p.plan]}} accessible={false} resizeMode="contain" style={{width:'100%',aspectRatio:1,borderRadius:12}}/><Text style={styles.planTitle}>{p.plan==='year'?'Annual':'Monthly'}</Text><Text style={styles.price}>{p.price} / {p.period}</Text><Text style={styles.planDetail}>Auto-renewing subscription · all available Plus features</Text><Text style={styles.planCTA}>Continue with Apple</Text></Pressable>)}
-   {!products.length&&<Text style={styles.body}>Plans are temporarily unavailable. No payment has been started.</Text>}
+   {loading&&<View accessibilityRole="progressbar"><ActivityIndicator color="#c2a9f6"/><Text style={styles.body}>Loading plans from Apple…</Text></View>}
    {!!error&&<Text accessibilityRole="alert" style={styles.error}>{error}</Text>}
-   <Pressable disabled={busy} onPress={load} accessibilityRole="button"><Text style={styles.link}>Refresh plans and status</Text></Pressable>
+   <Pressable disabled={busy||loading} onPress={load} accessibilityRole="button"><Text style={styles.link}>Refresh plans and status</Text></Pressable>
    <Pressable disabled={busy} onPress={restore} accessibilityRole="button"><Text style={styles.link}>{busy?'Working with Apple…':'Restore Purchases'}</Text></Pressable>
    <Pressable accessibilityRole="link" onPress={()=>Linking.openURL('https://apps.apple.com/account/subscriptions')}><Text style={styles.link}>Manage or cancel Apple subscription</Text></Pressable>
    <Text style={styles.legal}>Payment is charged to your Apple Account after you confirm. Your subscription renews automatically unless cancelled at least 24 hours before the current period ends. Apple charges renewal within 24 hours before that period ends. Manage or cancel in your Apple Account settings. Cancelling stops future renewals; access continues through the paid period.</Text>
    <View style={styles.links}><Pressable accessibilityRole="link" onPress={()=>Linking.openURL(PRIVACY)}><Text style={styles.link}>Privacy Policy</Text></Pressable><Pressable accessibilityRole="link" onPress={()=>Linking.openURL(TERMS)}><Text style={styles.link}>Terms of Use</Text></Pressable></View>
+   <Text style={styles.legal}>DailyVial {release.version} · Build {release.ios.buildNumber}</Text>
   </ScrollView></SafeAreaView>
  </Modal>;
  return {handle,sync,modal};
